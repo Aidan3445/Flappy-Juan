@@ -43,7 +43,8 @@ def run(world: XOR):
         world.net.trainLoop(world.data, 1000)
 
 
-xor = XOR()
-pg.init()
-pg.font.init()
-run(xor)
+if __name__ == "__main__":
+    xor = XOR()
+    pg.init()
+    pg.font.init()
+    run(xor)
