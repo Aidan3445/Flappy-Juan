@@ -1,10 +1,13 @@
 # Python-AI
+
+## Flappy Juan
 Making a flappy bird AI in python.
 
 Flappy Juan can be run from Main.py script with some command-line arguments to change
-various parameters for both playing and training.
+various parameters for both playing and training. 
+Pressing the space bar will toggle showing the best saved Juan if it exists. 
+In training mode you can toggle between four training speeds by pressing the numbers 1-4 on your keyboard.
 
-## Flappy Juan
 Flappy Juan is a Flappy Bird game I made for my roommate's birthday using his 
 head as the "bird" and my girlfriend as the "pipes".
 
