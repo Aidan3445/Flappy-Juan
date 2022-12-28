@@ -1,17 +1,33 @@
-from FlappyJuan import *
+import sys
+import os
+import json
+import pygame as pg
+import numpy as np
+
+from FlappyJuan import FlappyJuan
+from JuanAI import JuanAI
 
 
 # game class
 class FlappyLearn(FlappyJuan):
-    def __init__(self, size, popSize_, mutateRate=0.25, mutateAmount=0.1):
-        super().__init__(size)
-        self.mutateRate = mutateRate
-        self.mutateAmount = mutateAmount
+    def __init__(self, size, popSize, fileName=None, mutateRate=None, mutateAmount=None, cont=False):
+        super().__init__(size, fileName)
+        if mutateRate is None:
+            self.mutateRate = 0.25
+        else:
+            self.mutateRate = mutateRate  # rate of mutation between generations
+        if mutateAmount is None:
+            self.mutateAmount = 0.1
+        else:
+            self.mutateAmount = mutateAmount  # amount of mutation between generations
         self.runSpeed = 1
-        self.popSize = popSize_  # size of each generation
+        self.popSize = popSize  # size of each generation
         self.gen = 0  # generation number
-        self.numAlive = popSize_  # number of juans that are not collided, starts at full pop
-        self.juans = self.generatePopulation()  # list of birds in current population
+        self.numAlive = popSize  # number of juans that are not collided, starts at full pop
+        if cont:
+            self.loadPop()
+        else:
+            self.juans = self.generatePopulation()  # list of birds in current population
 
     # reset game
     def reset(self):
@@ -32,21 +48,31 @@ class FlappyLearn(FlappyJuan):
             for juan in prev:
                 juan.fitness /= total
             for i in range(self.popSize):
-                pop.append(self.pickChild())
+                pop.append(self.pickChild(prev))
         return pop
 
-    # picks child from population based on fitness
-    def pickChild(self):
+    # picks child from a population based on fitness
+    def pickChild(self, pop):
         index = 0
         r = np.random.rand()
         while r > 0:
-            r = r - self.juans[index].fitness
+            r = r - pop[index].fitness
             index += 1
         index -= 1
-        parentJson = self.juans[index].toJSON()
+        parentJson = pop[index].toJSON()
         child = JuanAI.fromJSON(parentJson, self)
         child.mutate(self.mutateRate, self.mutateAmount)
         return child
+
+    # load a population of children of the best ever
+    def loadPop(self):
+        savedMutateRate = self.mutateRate
+        self.mutateRate = 1  # guarantee mutation
+        pop = []
+        for i in range(self.popSize):
+            pop.append(self.loadJuan())
+        self.juans = self.generatePopulation(pop)
+        self.mutateRate = savedMutateRate  # reset rate
 
     # update player, obstacles, and score
     def update(self):
@@ -159,9 +185,3 @@ class FlappyLearn(FlappyJuan):
 
     def getScore(self):
         return self.bestEver.getScore()
-
-
-if __name__ == "__main__":
-    # initiate and run
-    fl = FlappyLearn(600, 500)
-    fl.play()
