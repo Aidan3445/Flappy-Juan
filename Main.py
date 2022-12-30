@@ -12,8 +12,8 @@ learn = modes.add_parser(name="learn")
 learn.add_argument("pop", type=int, help="size of the population for each training generation.")
 learn.add_argument("-c", "--cont", action="store_true", help="continue training with a population from the "
                                                              "saved best performing neural net weights.")
-learn.add_argument("-mr", "--mutation-rate", type=float, help="mutation rate for neuro-evolution.")
-learn.add_argument("-ma", "--mutation-amount", type=float, help="mutation amount for neuro-evolution.")
+learn.add_argument("-mr", "--mutation-rate", type=float, help="mutation rate for neuro-evolution (default: 0.25).")
+learn.add_argument("-ma", "--mutation-amount", type=float, help="mutation amount for neuro-evolution. (default: 0.1).")
 
 if __name__ == "__main__":
     args = parser.parse_args()

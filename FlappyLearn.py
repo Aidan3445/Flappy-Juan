@@ -184,4 +184,10 @@ class FlappyLearn(FlappyJuan):
         return JuanAI.fromJSON(data, self)
 
     def getScore(self):
-        return self.bestEver.getScore()
+        best = self.bestEver
+        if not best.collided:
+            return best.getScore()
+        for juan in self.juans:
+            if not juan.collided:
+                return juan.getScore()
+        return 0
