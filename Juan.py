@@ -12,7 +12,7 @@ class Juan(pg.sprite.Sprite):
         self.flapStrength = 20  # strength of flap
         self.score = 0  # pipes passed
         self.spriteImg = pg.transform.rotozoom(pg.image.load(
-            './Resources/FlappyJuan.png'), 0, 0.3)  # player image
+            'Resources/FlappyJuan.png'), 0, 0.3)  # player image
         self.rect = self.spriteImg.get_rect(center=(game.w * 4 / 13, game.h / 4))  # rect.x and .y hold coords of pipe
         self.mask = pg.mask.from_surface(self.spriteImg)  # mask of pipe for collisions
         self.game = game  # instance of flappy juan

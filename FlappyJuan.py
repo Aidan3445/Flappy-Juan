@@ -21,7 +21,7 @@ class FlappyJuan:
         self.counted = False  # helper variable for accurate pipe counting
         self.juan = Juan(self)  # player
         if fileName is None:
-            self.fileName = "./Resources/BestJuanJson.txt"
+            self.fileName = "Resources/BestJuanJson.txt"
         else:
             self.fileName = fileName  # file path for json of weights
         self.bestEver = self.loadJuan()  # load AI juan from the given file path

@@ -7,9 +7,9 @@ class Pipe(pg.sprite.Sprite):
     def __init__(self, x_, y_):
         super().__init__()  # pygame sprite constructor
         self.sarahT = pg.transform.rotozoom(pg.image.load(
-            './Resources/PipeySarah.png'), 180, 0.4)  # top pipe image
+            'Resources/PipeySarah.png'), 180, 0.4)  # top pipe image
         self.sarahB = pg.transform.rotozoom(pg.image.load(
-            './Resources/PipeySarah.png'), 0, 0.4)  # bottom pipe image
+            'Resources/PipeySarah.png'), 0, 0.4)  # bottom pipe image
         self.gap = np.random.randint(175, 250)  # gap size between top and bottom
         self.sarah = self.makePipe().convert_alpha()  # combined pipe image
         self.rect = self.sarah.get_rect(center=(x_, y_))  # rect.x and .y hold coords of pipe
