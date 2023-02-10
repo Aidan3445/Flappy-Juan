@@ -15,6 +15,7 @@ learn.add_argument("-c", "--cont", action="store_true", help="continue training 
 learn.add_argument("-mr", "--mutation-rate", type=float, help="mutation rate for neuro-evolution (default: 0.25).")
 learn.add_argument("-ma", "--mutation-amount", type=float, help="mutation amount for neuro-evolution. (default: 0.1).")
 
+
 if __name__ == "__main__":
     args = parser.parse_args()
     file = args.file_path
